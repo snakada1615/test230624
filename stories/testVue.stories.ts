@@ -3,7 +3,7 @@ import testVue from "../components/atoms/testVue.vue";
 
 export default {
   component: testVue,
-  title: "testVue",
+  title: "sample/testVue",
   tags: ["autodocs"],
   // 👇 Our events will be mapped in Storybook UI
   argTypes: {

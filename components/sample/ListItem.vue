@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { integer, number, string } from "vue-types";
 import Availability from "./AvailabilityStatus.vue";
-import { statusType } from "~/types";
+import { statusType } from "~/components/types";
 defineProps({
   id: integer().isRequired,
   description: string().isRequired,
