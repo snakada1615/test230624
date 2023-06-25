@@ -1,20 +1,18 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="q-pa-md">
-    <q-btn color="primary" label="Primary" class="q-ma-lg" />
-    <QBtn color="secondary" label="Secondary" />
-    <LazyQBtn color="amber" glossy label="Amber" />
-    <NuxtLink to="/vueTypes"> vueTypes </NuxtLink>
-    <q-card
-      style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-      class="text-white on-left"
-    >
-      <div>meee</div>
-      <q-card-section
-        ><div>popo</div>
-        beee</q-card-section
-      >
-    </q-card>
+  <div id="app">
+    <q-btn color="primary" class="q-mx-lg-md">
+      <div>Primary</div>
+      <NuxtLink to="/"> top </NuxtLink>
+    </q-btn>
+    <q-btn color="secondary" class="q-mx-lg-md">
+      <div>Secondary</div>
+      <NuxtLink to="/vueTypes"> vueTypes </NuxtLink>
+    </q-btn>
+    <q-btn color="amber" class="q-mx-lg-md">
+      <div>Tertiary</div>
+      <NuxtLink to="/test2"> test2</NuxtLink>
+    </q-btn>
   </div>
 </template>
