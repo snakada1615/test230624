@@ -8,6 +8,23 @@
         {{ qaList.qaTitle }}
       </div>
     </div>
+    test
+    <q-card
+      style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
+      class="text-white"
+    >
+      <div>meee</div>
+      <q-card-section>
+        <div>popo</div>
+        <q-select
+          v-model="testSelected"
+          color="teal"
+          filled
+          :options="options"
+          :label="testSelected"
+        />
+      </q-card-section>
+    </q-card>
     <!--
          qaListの項目に沿って質問と回答一案（ドロップダウン）を表示
          項目のインデックスが0の時だけNutritionBarを表示
@@ -16,9 +33,24 @@
       v-for="(qaGroup, index) in qaList.categoryList"
       :key="index"
       style="min-width: 530px"
-      bg-secondary
-      bordered
+      header-bg-variant="success"
+      bg-variant="light"
+      border-variant="success"
+      class="mx-1 px-0 my-2"
     >
+      <q-card-section>
+        <div>{{ qaGroup.category }}</div>
+      </q-card-section>
+      <q-select
+        v-model="testSelected"
+        :options="options"
+        :dense="true"
+        :options-dense="true"
+        label="Standard"
+        color="teal"
+        filled
+      />
+      {{ testSelected }}
       <q-card-section>
         <ul class="pl-2 my-0">
           <li
@@ -78,34 +110,21 @@
 
 import { arrayOf, instanceOf } from "vue-types";
 import { computed, ref } from "vue";
-import {
-  AnswerItem,
-  AnswerList,
-  AnswerOption,
-  CategoryItem,
-  SingleQuestion,
-} from "../myClass";
+import { AnswerItem, QaList } from "../myClass";
+
+const options = ["Google", "Facebook", "Twitter", "Apple", "Oracle"];
+const testSelected = ref("Apple");
 
 const props = defineProps({
   /**
-   * 質問の一覧
+   * 質問と回答optionの一覧
    */
-  qaList: arrayOf(SingleQuestion),
-
-  /**
-   * カテゴリの一覧
-   */
-  categoryList: arrayOf(CategoryItem),
-
-  /**
-   * 回答オプションの一覧
-   */
-  answerOptions: arrayOf(AnswerOption),
+  qaList: instanceOf(QaList),
 
   /**
    * 回答一覧
    */
-  answerList: instanceOf(AnswerList),
+  answerList: arrayOf(AnswerItem),
   /**
    * 表示項目に応じて追加コンポーネントを表示するためのフラグ
    */
@@ -117,14 +136,6 @@ const props = defineProps({
 
 const emits = defineEmits(["update:answerList"]);
 const answerListComputed = computed(() => props.answerList);
-const answerOptionComputed = computed(() => {
-  return props.answerOptions?.map((item) => {
-    return {
-      label: item.optionText,
-      data: item,
-    };
-  });
-});
 
 function onAnswerChanged(val) {
   const res = JSON.parse(JSON.stringify(props.answerList));

@@ -11,7 +11,7 @@ import {
 export default {
   title: "NFA-app/molecules/qaTool",
   component: qaTool,
-  tags: ["NFA"],
+  tags: ["autodocs"],
 };
 
 const category1 = new CategoryList("type a", "a1", 15, []);

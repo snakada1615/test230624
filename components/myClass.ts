@@ -134,3 +134,36 @@ export class AnswerItem {
     public score: number
   ) {}
 }
+
+export class SingleQuestion {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(
+    public categoryId: string,
+    public questionId: string,
+    public questionText: string
+  ) {}
+}
+
+export class CategoryItem {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(public categoryId: string, public categoryText: string) {}
+}
+
+export class AnswerList {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(public answerList: AnswerItem[]) {}
+
+  get categoryScore() {
+    return this.answerList.reduce((accum, current) => {
+      const myIndex = accum.findIndex(
+        (item) => item.categoryId === current.categoryId
+      );
+      if (myIndex === -1) {
+        accum[current.categoryId] = current.score;
+      } else {
+        accum[current.categoryId] += current.score;
+      }
+      return accum;
+    }, []);
+  }
+}

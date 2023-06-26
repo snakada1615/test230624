@@ -2,17 +2,14 @@
 
 <template>
   <div id="app">
-    <q-btn color="primary" class="q-mx-lg-md">
-      <div>Primary</div>
-      <NuxtLink to="/"> top </NuxtLink>
+    <q-btn color="primary" class="q-mx-lg-md" to="/">
+      <div>Top</div>
     </q-btn>
-    <q-btn color="secondary" class="q-mx-lg-md">
-      <div>Secondary</div>
-      <NuxtLink to="/vueTypes"> vueTypes </NuxtLink>
+    <q-btn color="secondary" class="q-mx-lg-md" to="/vueTypes">
+      <div>vueTypes</div>
     </q-btn>
-    <q-btn color="amber" class="q-mx-lg-md">
-      <div>Tertiary</div>
-      <NuxtLink to="/test2"> test2</NuxtLink>
+    <q-btn color="amber" class="q-mx-lg-md" to="/test2">
+      <div>test2</div>
     </q-btn>
   </div>
 </template>

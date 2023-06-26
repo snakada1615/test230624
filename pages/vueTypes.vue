@@ -28,7 +28,9 @@ const list = [
 
 <template>
   <div id="app">
-    <NuxtLink to="/"> Top </NuxtLink>
+    <q-btn color="primary" class="q-mx-lg-md" to="/">
+      <div>Top</div>
+    </q-btn>
     <product-list :list="list" />
   </div>
 </template>
