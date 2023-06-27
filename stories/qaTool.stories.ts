@@ -2,9 +2,8 @@
 import qaTool from "../components/atoms/qaTool.vue";
 import {
   AnswerItem,
-  AnswerOption,
-  CategoryList,
-  QaList,
+  AnswerList,
+  CategoryItem,
   QuestionItem,
 } from "../components/myClass";
 
@@ -14,78 +13,60 @@ export default {
   tags: ["autodocs"],
 };
 
-const category1 = new CategoryList("type a", "a1", 15, []);
-category1.addQuestionItem(
-  new QuestionItem("this is question a1", "a1-01", false, 0, [
-    new AnswerOption("this is choice a1-01-option1", 0, "a1-01-option1"),
-    new AnswerOption("this is choice a1-01-option2", 1, "a1-01-option2"),
-    new AnswerOption("this is choice a1-01-option3", 2, "a1-01-option3"),
-    new AnswerOption("this is choice a1-01-option4", 3, "a1-01-option4"),
-    new AnswerOption("this is choice a1-01-option5", 4, "a1-01-option5"),
-  ])
-);
-category1.addQuestionItem(
-  new QuestionItem("this is question a2", "a1-02", false, 0, [
-    new AnswerOption("this is choice a1-02-option1", 0, "a1-02-option1"),
-    new AnswerOption("this is choice a1-02-option2", 1, "a1-02-option2"),
-    new AnswerOption("this is choice a1-02-option3", 2, "a1-02-option3"),
-    new AnswerOption("this is choice a1-02-option4", 3, "a1-02-option4"),
-    new AnswerOption("this is choice a1-02-option5", 4, "a1-02-option5"),
-  ])
-);
-category1.addQuestionItem(
-  new QuestionItem("this is question a3", "a1-03", false, 0, [
-    new AnswerOption("this is choice a1-03-option1", 0, "a1-03-option1"),
-    new AnswerOption("this is choice a1-03-option2", 1, "a1-03-option2"),
-    new AnswerOption("this is choice a1-03-option3", 2, "a1-03-option3"),
-    new AnswerOption("this is choice a1-03-option4", 3, "a1-03-option4"),
-    new AnswerOption("this is choice a1-03-option5", 4, "a1-03-option5"),
-  ])
-);
-
-const category2 = new CategoryList("type b", "b1", 25, []);
-category2.addQuestionItem(
-  new QuestionItem("this is question b1", "b1-01", false, 0, [
-    new AnswerOption("this is choice b1-01-option1", 0, "b1-01-option1"),
-    new AnswerOption("this is choice b1-01-option2", 1, "b1-01-option2"),
-    new AnswerOption("this is choice b1-01-option3", 2, "b1-01-option3"),
-    new AnswerOption("this is choice b1-01-option4", 3, "b1-01-option4"),
-    new AnswerOption("this is choice b1-01-option5", 4, "b1-01-option5"),
-  ])
-);
-category2.addQuestionItem(
-  new QuestionItem("this is question a2", "b1-02", false, 0, [
-    new AnswerOption("this is choice b1-02-option1", 0, "b1-02-option1"),
-    new AnswerOption("this is choice b1-02-option2", 1, "b1-02-option2"),
-    new AnswerOption("this is choice b1-02-option3", 2, "b1-02-option3"),
-    new AnswerOption("this is choice b1-02-option4", 3, "b1-02-option4"),
-    new AnswerOption("this is choice b1-02-option5", 4, "b1-02-option5"),
-  ])
-);
-category2.addQuestionItem(
-  new QuestionItem("this is question a3", "b1-03", false, 0, [
-    new AnswerOption("this is choice b1-03-option1", 0, "b1-03-option1"),
-    new AnswerOption("this is choice b1-03-option2", 1, "b1-03-option2"),
-    new AnswerOption("this is choice b1-03-option3", 2, "b1-03-option3"),
-    new AnswerOption("this is choice b1-03-option4", 3, "b1-03-option4"),
-    new AnswerOption("this is choice b1-03-option5", 4, "b1-03-option5"),
-  ])
-);
-
-const qaList = new QaList("QA sample", 0, [category1, category2]);
-
-const answerList = [
-  new AnswerItem("a1", "a1-01", "", 1),
-  new AnswerItem("a1", "a1-02", "", 2),
-  new AnswerItem("a1", "a1-03", "", 3),
-  new AnswerItem("b1", "b1-01", "", 4),
-  new AnswerItem("b1", "b1-02", "", 3),
-  new AnswerItem("b1", "b1-03", "", 2),
+const categoryList = [
+  new CategoryItem("a", "this is category a"),
+  new CategoryItem("b", "this is category b"),
 ];
+
+const questionList = [
+  new QuestionItem("a", "a-01", "this is question a-01"),
+  new QuestionItem("a", "a-02", "this is question a-02"),
+  new QuestionItem("a", "a-03", "this is question a-03"),
+  new QuestionItem("b", "b-01", "this is question b-01"),
+  new QuestionItem("b", "b-02", "this is question b-02"),
+  new QuestionItem("b", "b-03", "this is question b-03"),
+];
+
+const answerOptions = [
+  new AnswerItem("a", "a-01", "1", "i am answer 1", 0),
+  new AnswerItem("a", "a-01", "2", "i am answer 2", 1),
+  new AnswerItem("a", "a-01", "3", "i am answer 3", 2),
+  new AnswerItem("a", "a-01", "4", "i am answer 4", 3),
+  new AnswerItem("a", "a-02", "1", "i am answer 1", 0),
+  new AnswerItem("a", "a-02", "2", "i am answer 2", 1),
+  new AnswerItem("a", "a-02", "3", "i am answer 3", 2),
+  new AnswerItem("a", "a-02", "4", "i am answer 4", 3),
+  new AnswerItem("a", "a-03", "1", "i am answer 1", 0),
+  new AnswerItem("a", "a-03", "2", "i am answer 2", 1),
+  new AnswerItem("a", "a-03", "3", "i am answer 3", 2),
+  new AnswerItem("a", "a-03", "4", "i am answer 4", 3),
+  new AnswerItem("b", "b-01", "1", "i am answer 1", 0),
+  new AnswerItem("b", "b-01", "2", "i am answer 2", 1),
+  new AnswerItem("b", "b-01", "3", "i am answer 3", 2),
+  new AnswerItem("b", "b-01", "4", "i am answer 4", 3),
+  new AnswerItem("b", "b-02", "1", "i am answer 1", 0),
+  new AnswerItem("b", "b-02", "2", "i am answer 2", 1),
+  new AnswerItem("b", "b-02", "3", "i am answer 3", 2),
+  new AnswerItem("b", "b-02", "4", "i am answer 4", 3),
+  new AnswerItem("b", "b-03", "1", "i am answer 1", 0),
+  new AnswerItem("b", "b-03", "2", "i am answer 2", 1),
+  new AnswerItem("b", "b-03", "3", "i am answer 3", 2),
+  new AnswerItem("b", "b-03", "4", "i am answer 4", 3),
+];
+
+const answerList = new AnswerList();
+answerList.add(new AnswerItem("a", "a-01", "3", "i am answer 3", 2));
+answerList.add(new AnswerItem("a", "a-02", "1", "i am answer 1", 0));
+answerList.add(new AnswerItem("a", "a-03", "4", "i am answer 4", 3));
+answerList.add(new AnswerItem("b", "b-01", "2", "i am answer 2", 1));
+answerList.add(new AnswerItem("b", "b-02", "4", "i am answer 4", 3));
+answerList.add(new AnswerItem("b", "b-03", "1", "i am answer 1", 0));
 
 export const Default = {
   args: {
-    qaList,
+    questionList,
+    categoryList,
+    answerOptions,
     answerList,
   },
 };
