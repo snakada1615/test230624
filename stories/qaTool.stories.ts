@@ -54,13 +54,14 @@ const answerOptions = [
   new AnswerItem("b", "b-03", "4", "i am answer 4", 3),
 ];
 
-const answerList = new AnswerList();
-answerList.add(new AnswerItem("a", "a-01", "3", "i am answer 3", 2));
-answerList.add(new AnswerItem("a", "a-02", "1", "i am answer 1", 0));
-answerList.add(new AnswerItem("a", "a-03", "4", "i am answer 4", 3));
-answerList.add(new AnswerItem("b", "b-01", "2", "i am answer 2", 1));
-answerList.add(new AnswerItem("b", "b-02", "4", "i am answer 4", 3));
-answerList.add(new AnswerItem("b", "b-03", "1", "i am answer 1", 0));
+const answerList = new AnswerList(
+  new AnswerItem("a", "a-01", "3", "i am answer 3", 2),
+  new AnswerItem("a", "a-02", "1", "i am answer 1", 0),
+  new AnswerItem("a", "a-03", "4", "i am answer 4", 3),
+  new AnswerItem("b", "b-01", "2", "i am answer 2", 1),
+  new AnswerItem("b", "b-02", "4", "i am answer 4", 3),
+  new AnswerItem("b", "b-03", "1", "i am answer 1", 0)
+);
 
 export const Default = {
   args: {

@@ -23,13 +23,13 @@ export class CategoryItem {
   constructor(public categoryId: string, public categoryText: string) {}
 }
 
-export class AnswerList extends Array {
+export class AnswerList extends Array<AnswerItem> {
   add = function (model: AnswerItem) {
     this.push(model);
   };
 
   get categoryScore() {
-    return this.answerList.reduce((accum, current) => {
+    return this.reduce((accum, current) => {
       const myIndex = accum.findIndex(
         (item) => item.categoryId === current.categoryId
       );

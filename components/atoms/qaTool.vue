@@ -9,6 +9,7 @@
         title
       </div>
     </div>
+    {{ answerList }}
     <!--
          questionListの項目に沿って質問と回答一案（ドロップダウン）を表示
          項目のインデックスが0の時だけNutritionBarを表示
@@ -16,7 +17,8 @@
     <q-card
       v-for="(category, index) in categoryList"
       :key="index"
-      style="min-width: 530px; background: seagreen"
+      style="min-width: 530px"
+      class="baseColor"
       bordered
     >
       {{ category.categoryText }}
@@ -44,20 +46,12 @@
             <q-select
               :dense="true"
               :options-dense="true"
-              :value="
-                answerListComputed.find((item) => {
-                  return (
-                    item.categoryId === category.categoryId &&
-                    item.questionId === question.questionId
-                  );
-                })
-              "
+              :value="temp[question.questionId]"
               :options="
-                answerOptionDisplay.filter(
-                  (item) =>
-                    item.categoryId === category.categoryId &&
-                    item.questionId === question.questionId
-                )
+                answerOptionsFiltered({
+                  categoryId: category.categoryId,
+                  questionId: question.questionId,
+                })
               "
               @input="console.log($event)"
             />
@@ -74,7 +68,7 @@
  */
 
 import { arrayOf, instanceOf } from "vue-types";
-import { computed } from "vue";
+import { ref } from "vue";
 import { AnswerItem, AnswerList, CategoryItem, QuestionItem } from "../myClass";
 
 const props = defineProps({
@@ -106,24 +100,50 @@ const props = defineProps({
   },
 });
 
+/*
 const emits = defineEmits(["update:answerList"]);
-const answerListComputed = computed(() => props.answerList);
-const answerOptionDisplay = computed({
-  get: () =>
-    props.answerOptions?.map((item) => {
+function answerListFiltered(item) {
+  return props.answerList?.filter(
+    (item2) =>
+      item2.categoryId === item.categoryId &&
+      item2.questionId === item.questionId
+  );
+}
+*/
+
+function answerOptionsFiltered(item) {
+  return props.answerOptions
+    ?.filter(
+      (item2) =>
+        item2.categoryId === item.categoryId &&
+        item2.questionId === item.questionId
+    )
+    .map((item) => {
       return {
         label: item.optionText,
         value: item,
       };
-    }),
-  set: (val) => {
-    const res = JSON.parse(JSON.stringify(props.answerList));
-    const index = res.findIndex(
-      (item) =>
-        item.categoryId === val.categoryId && item.questionId === val.questionId
-    );
-    res.splice(index, 1, val);
-    emits("update:answerList", res);
-  },
-});
+    });
+}
+
+const temp = ref({});
+
+// const answerOptionDisplay = computed({
+//   get: () =>
+//     props.answerOptions?.map((item) => {
+//       return {
+//         label: item.optionText,
+//         value: item,
+//       };
+//     }),
+//   set: (val) => {
+//     const res = JSON.parse(JSON.stringify(props.answerList));
+//     const index = res.findIndex(
+//       (item) =>
+//         item.categoryId === val.categoryId && item.questionId === val.questionId
+//     );
+//     res.splice(index, 1, val);
+//     emits("update:answerList", res);
+//   },
+// });
 </script>
