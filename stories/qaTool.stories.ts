@@ -1,4 +1,4 @@
-// import { action } from '@storybook/addon-actions'
+import { action } from "@storybook/addon-actions";
 import qaTool from "../components/atoms/qaTool.vue";
 import {
   AnswerItem,
@@ -54,20 +54,30 @@ const answerOptions = [
   new AnswerItem("b", "b-03", "4", "i am answer 4", 3),
 ];
 
-const answerList = new AnswerList(
+const answerList = new AnswerList([
   new AnswerItem("a", "a-01", "3", "i am answer 3", 2),
   new AnswerItem("a", "a-02", "1", "i am answer 1", 0),
   new AnswerItem("a", "a-03", "4", "i am answer 4", 3),
   new AnswerItem("b", "b-01", "2", "i am answer 2", 1),
   new AnswerItem("b", "b-02", "4", "i am answer 4", 3),
-  new AnswerItem("b", "b-03", "1", "i am answer 1", 0)
-);
+  new AnswerItem("b", "b-03", "1", "i am answer 1", 0),
+]);
 
-export const Default = {
-  args: {
-    questionList,
-    categoryList,
-    answerOptions,
-    answerList,
+const Template = (args) => ({
+  components: { qaTool },
+  setup() {
+    return { args };
   },
+  template: "<qaTool " + '@input="updateQaScore" ' + 'v-bind="args" ' + "/>",
+  methods: {
+    updateQaScore: action("update qa"),
+  },
+});
+
+export const Default = Template.bind({});
+Default.args = {
+  questionList,
+  categoryList,
+  answerOptions,
+  answerList,
 };

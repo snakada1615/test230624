@@ -23,10 +23,23 @@ export class CategoryItem {
   constructor(public categoryId: string, public categoryText: string) {}
 }
 
-export class AnswerList extends Array<AnswerItem> {
+export class AnswerList<AnswerItem> extends Array {
+  constructor(input: AnswerItem[]) {
+    super(input.length);
+    input.forEach((element, index) => {
+      this[index] = element;
+    });
+  }
+
   add = function (model: AnswerItem) {
     this.push(model);
   };
+
+  getItem(index) {
+    return this.find((item) => {
+      return item.questionId === index;
+    });
+  }
 
   get categoryScore() {
     return this.reduce((accum, current) => {

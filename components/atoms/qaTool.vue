@@ -1,36 +1,33 @@
 <template>
-  <div class="q-ma-md">
-    {{ answerList }}
-    <!--  ここから質問項目のはじまり  -->
-    <div class="row">
-      <div
-        class="column mx-0 mb-0 py-2 bg-dark rounded text-light font-weight-bold"
-      >
-        title
+  <div>
+    <div class="q-ma-md">
+      <!--  ここから質問項目のはじまり  -->
+      <div class="row">
+        <div class="column mx-0 mb-0 py-2 bg-dark text-white font-weight-bold">
+          title
+        </div>
       </div>
     </div>
-    {{ answerList }}
     <!--
-         questionListの項目に沿って質問と回答一案（ドロップダウン）を表示
-         項目のインデックスが0の時だけNutritionBarを表示
-           -->
+           questionListの項目に沿って質問と回答一案（ドロップダウン）を表示
+           項目のインデックスが0の時だけNutritionBarを表示
+             -->
     <q-card
       v-for="(category, index) in categoryList"
       :key="index"
       style="min-width: 530px"
-      class="baseColor"
+      class="baseColor q-px-sm q-my-md bg-grey-2 text-black"
       bordered
     >
       {{ category.categoryText }}
-      {{ category.categoryId }}
       <q-card-section>
-        <ul class="pl-2 my-0">
+        <ul>
           <li
             v-for="(question, index2) in questionList.filter(
               (item) => item.categoryId === category.categoryId
             )"
             :key="index2"
-            :class="{ 'q-mt-lg': index2 !== 0 }"
+            :class="{ 'q-mt-xs': index2 !== 0 }"
           >
             <!--    追加項目の表示      -->
             <slot
@@ -44,19 +41,23 @@
 
             {{ question.questionText }}
             <q-select
+              v-model="answerListComputed[question.questionId]"
               :dense="true"
               :options-dense="true"
-              :value="temp[question.questionId]"
               :options="
                 answerOptionsFiltered({
                   categoryId: category.categoryId,
                   questionId: question.questionId,
                 })
               "
-              @input="console.log($event)"
+              label-color="white"
+              filled
+              bg-color="green"
+              @update:model-value="setOption($event)"
             />
           </li>
         </ul>
+        {{ typeof props.answerOptions }}
       </q-card-section>
     </q-card>
   </div>
@@ -67,8 +68,8 @@
  * ユーザーが解答を選択するごとに変更内容をemit
  */
 
-import { arrayOf, instanceOf } from "vue-types";
-import { ref } from "vue";
+import { array, arrayOf, instanceOf } from "vue-types";
+import { computed } from "vue";
 import { AnswerItem, AnswerList, CategoryItem, QuestionItem } from "../myClass";
 
 const props = defineProps({
@@ -85,7 +86,7 @@ const props = defineProps({
   /**
    * 回答オプションの一覧
    */
-  answerOptions: arrayOf(AnswerItem),
+  answerOptions: array<AnswerItem>() as Array<any>,
 
   /**
    * 回答一覧
@@ -100,16 +101,9 @@ const props = defineProps({
   },
 });
 
-/*
-const emits = defineEmits(["update:answerList"]);
-function answerListFiltered(item) {
-  return props.answerList?.filter(
-    (item2) =>
-      item2.categoryId === item.categoryId &&
-      item2.questionId === item.questionId
-  );
-}
-*/
+const emits = defineEmits<{
+  (e: "input", value: AnswerList<AnswerItem>): void;
+}>();
 
 function answerOptionsFiltered(item) {
   return props.answerOptions
@@ -126,24 +120,24 @@ function answerOptionsFiltered(item) {
     });
 }
 
-const temp = ref({});
+function setOption(key) {
+  const result = props.answerList.map((item) => {
+    if (
+      item.categoryId === key.categoryId &&
+      item.questionId === key.questionId
+    ) {
+      return key.value;
+    } else {
+      return item;
+    }
+  });
+  emits("input", result);
+}
 
-// const answerOptionDisplay = computed({
-//   get: () =>
-//     props.answerOptions?.map((item) => {
-//       return {
-//         label: item.optionText,
-//         value: item,
-//       };
-//     }),
-//   set: (val) => {
-//     const res = JSON.parse(JSON.stringify(props.answerList));
-//     const index = res.findIndex(
-//       (item) =>
-//         item.categoryId === val.categoryId && item.questionId === val.questionId
-//     );
-//     res.splice(index, 1, val);
-//     emits("update:answerList", res);
-//   },
-// });
+const answerListComputed = computed(() => {
+  return props.answerList.reduce(
+    (accum, current) => (accum[current.questionId] = current),
+    {}
+  );
+});
 </script>
