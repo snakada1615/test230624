@@ -5,6 +5,7 @@
       <div class="row">
         <div class="column mx-0 mb-0 py-2 bg-dark text-white font-weight-bold">
           title
+          {{ answerList }}
         </div>
       </div>
     </div>
@@ -68,7 +69,7 @@
  * ユーザーが解答を選択するごとに変更内容をemit
  */
 
-import { array, arrayOf, instanceOf } from "vue-types";
+import { arrayOf, instanceOf } from "vue-types";
 import { computed } from "vue";
 import { AnswerItem, AnswerList, CategoryItem, QuestionItem } from "../myClass";
 
@@ -86,7 +87,7 @@ const props = defineProps({
   /**
    * 回答オプションの一覧
    */
-  answerOptions: array<AnswerItem>() as Array<any>,
+  answerOptions: instanceOf(AnswerList),
 
   /**
    * 回答一覧
@@ -107,7 +108,7 @@ const emits = defineEmits<{
 
 function answerOptionsFiltered(item) {
   return props.answerOptions
-    ?.filter(
+    .filter(
       (item2) =>
         item2.categoryId === item.categoryId &&
         item2.questionId === item.questionId
@@ -121,7 +122,9 @@ function answerOptionsFiltered(item) {
 }
 
 function setOption(key) {
+  console.log(props.answerList);
   const result = props.answerList.map((item) => {
+    console.log(item);
     if (
       item.categoryId === key.categoryId &&
       item.questionId === key.questionId
@@ -131,6 +134,7 @@ function setOption(key) {
       return item;
     }
   });
+  console.log(result);
   emits("input", result);
 }
 

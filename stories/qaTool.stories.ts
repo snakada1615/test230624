@@ -27,8 +27,8 @@ const questionList = [
   new QuestionItem("b", "b-03", "this is question b-03"),
 ];
 
-const answerOptions = [
-  new AnswerItem("a", "a-01", "1", "i am answer 1", 0),
+const answerOptions = new AnswerList[
+  (new AnswerItem("a", "a-01", "1", "i am answer 1", 0),
   new AnswerItem("a", "a-01", "2", "i am answer 2", 1),
   new AnswerItem("a", "a-01", "3", "i am answer 3", 2),
   new AnswerItem("a", "a-01", "4", "i am answer 4", 3),
@@ -51,17 +51,17 @@ const answerOptions = [
   new AnswerItem("b", "b-03", "1", "i am answer 1", 0),
   new AnswerItem("b", "b-03", "2", "i am answer 2", 1),
   new AnswerItem("b", "b-03", "3", "i am answer 3", 2),
-  new AnswerItem("b", "b-03", "4", "i am answer 4", 3),
-];
+  new AnswerItem("b", "b-03", "4", "i am answer 4", 3))
+]();
 
-const answerList = new AnswerList([
-  new AnswerItem("a", "a-01", "3", "i am answer 3", 2),
+const answerList = new AnswerList[
+  (new AnswerItem("a", "a-01", "3", "i am answer 3", 2),
   new AnswerItem("a", "a-02", "1", "i am answer 1", 0),
   new AnswerItem("a", "a-03", "4", "i am answer 4", 3),
   new AnswerItem("b", "b-01", "2", "i am answer 2", 1),
   new AnswerItem("b", "b-02", "4", "i am answer 4", 3),
-  new AnswerItem("b", "b-03", "1", "i am answer 1", 0),
-]);
+  new AnswerItem("b", "b-03", "1", "i am answer 1", 0))
+]();
 
 const Template = (args) => ({
   components: { qaTool },

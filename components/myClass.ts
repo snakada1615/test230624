@@ -23,12 +23,15 @@ export class CategoryItem {
   constructor(public categoryId: string, public categoryText: string) {}
 }
 
-export class AnswerList<AnswerItem> extends Array {
-  constructor(input: AnswerItem[]) {
-    super(input.length);
-    input.forEach((element, index) => {
-      this[index] = element;
-    });
+export class AnswerList<AnswerItem> extends Array<AnswerItem> {
+  // constructor(input: AnswerItem[]) {
+  //   super(input.length);
+  //   input.forEach((element, index) => {
+  //     this[index] = element;
+  //   });
+  // }
+  constructor(items?: Array<AnswerItem>) {
+    super(...items);
   }
 
   add = function (model: AnswerItem) {
