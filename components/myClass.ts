@@ -30,9 +30,12 @@ export class AnswerList<AnswerItem> extends Array<AnswerItem> {
   //     this[index] = element;
   //   });
   // }
-  constructor(items?: Array<AnswerItem>) {
-    super(...items);
-  }
+  // constructor(items?: Array<AnswerItem>) {
+  //   if (typeof items === "array") {
+  //     super(...items);
+  //   }
+  //   console.log(typeof items);
+  // }
 
   add = function (model: AnswerItem) {
     this.push(model);

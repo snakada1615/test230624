@@ -5,7 +5,6 @@
       <div class="row">
         <div class="column mx-0 mb-0 py-2 bg-dark text-white font-weight-bold">
           title
-          {{ answerList }}
         </div>
       </div>
     </div>
@@ -30,7 +29,7 @@
             :key="index2"
             :class="{ 'q-mt-xs': index2 !== 0 }"
           >
-            <!--    追加項目の表示      -->
+            <!--    keyが一致した場合にslotに追加項目の表示      -->
             <slot
               v-if="
                 extraComponentFlag.includes(
@@ -58,7 +57,6 @@
             />
           </li>
         </ul>
-        {{ typeof props.answerOptions }}
       </q-card-section>
     </q-card>
   </div>
@@ -75,14 +73,14 @@ import { AnswerItem, AnswerList, CategoryItem, QuestionItem } from "../myClass";
 
 const props = defineProps({
   /**
-   * 質問の一覧
-   */
-  questionList: arrayOf(QuestionItem),
-
-  /**
    * カテゴリの一覧
    */
   categoryList: arrayOf(CategoryItem),
+
+  /**
+   * 質問の一覧
+   */
+  questionList: arrayOf(QuestionItem),
 
   /**
    * 回答オプションの一覧
@@ -122,19 +120,16 @@ function answerOptionsFiltered(item) {
 }
 
 function setOption(key) {
-  console.log(props.answerList);
   const result = props.answerList.map((item) => {
-    console.log(item);
     if (
-      item.categoryId === key.categoryId &&
-      item.questionId === key.questionId
+      item.categoryId === key.value.categoryId &&
+      item.questionId === key.value.questionId
     ) {
       return key.value;
     } else {
       return item;
     }
   });
-  console.log(result);
   emits("input", result);
 }
 
