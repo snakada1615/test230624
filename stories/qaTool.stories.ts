@@ -5,7 +5,7 @@ import {
   AnswerList,
   CategoryItem,
   QuestionItem,
-} from "~/components/myClass";
+} from "../components/myClass";
 
 export default {
   title: "NFA-app/molecules/qaTool",
